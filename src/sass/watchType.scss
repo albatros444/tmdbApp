@@ -1,0 +1,13 @@
+.accordion__watchType {
+  padding-top: 30px;
+
+  li {
+    margin-bottom: 20px;
+    color: white;
+    list-style-type: none;
+    overflow-y: scroll;
+    -ms-overflow-style: none; /* for Internet Explorer, Edge */
+    scrollbar-width: none; /* for Firefox */
+    cursor: pointer;
+  }
+}

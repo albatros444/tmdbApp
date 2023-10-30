@@ -1,0 +1,26 @@
+@import "globals";
+@import "watchType";
+@import "batchOfItems";
+@import "genres";
+@import "filmOrShowDescription";
+
+.App {
+  background: radial-gradient(rgb(32, 31, 31), black);
+}
+.accordion {
+  display: flex;
+  transition: all 0.15s ease-in-out;
+}
+
+button {
+  display: block;
+  padding: 0;
+  border: none;
+  outline: inherit;
+  cursor: pointer;
+  font-family: inherit;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  background: none;
+}

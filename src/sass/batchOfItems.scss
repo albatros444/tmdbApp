@@ -1,0 +1,36 @@
+.accordion__batchOfItems {
+  display: flex;
+  flex-shrink: 0;
+  flex-direction: column;
+  height: 100vh;
+  padding-top: 10px;
+  overflow-y: scroll;
+  -ms-overflow-style: none; /* for Internet Explorer, Edge */
+  scrollbar-width: none; /* for Firefox */
+  .movieShowCard {
+    display: flex;
+
+    width: 400px;
+    height: 135px;
+    margin-bottom: 20px;
+    padding: 10px;
+    padding-bottom: 0;
+    cursor: pointer;
+    background-color: rgb(68, 67, 67);
+    img {
+      margin-bottom: 10px;
+      width: 85px;
+      flex-shrink: 0;
+    }
+    &__description {
+      font-size: 13px;
+      padding-left: 20px;
+      color: white;
+      .language {
+        span {
+          color: red;
+        }
+      }
+    }
+  }
+}

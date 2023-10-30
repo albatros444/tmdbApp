@@ -1,70 +1,116 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import "./css/app.css";
+import WatchType from "./components/WatchType";
+import Genres from "./components/Genres";
+import { options } from "./utilities/tmdbOptions";
+import BatchOfItems from "./components/BatchOfItems";
+import FilmOrShowDescr from "./components/FilmOrShowDescr";
 
 function App() {
-  const [genres, setGenres] = useState(null);
+  const [movieGenres, setMovieGenres] = useState(null);
+  const [TVshowGenres, setTVshowGenres] = useState(null);
   const [movies, setMovies] = useState(null);
-  const options = {
-    method: "GET",
-    headers: {
-      accept: "application/json",
-      Authorization:
-        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhNjdjNzkwZmVkNTI4ZTQ2YzE5YTE1OTg4NWI1Yjc1OSIsInN1YiI6IjY1MjMwMjgzYjNmNmY1MDEzOTMyZThiMCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.VAtPOlmzxoYso6wvi9rCS3dTlCAiIevp4J1aSt5p2gk",
-    },
-  };
-  useEffect(() => {
-    const fetchGenre = async () => {
-      fetch(
-        "https://api.themoviedb.org/3/genre/movie/list?language=en",
-        options
-      )
-        .then((response) => response.json())
-        .then((response) => {
-          setGenres(response.genres);
-        })
-        .catch((err) => console.error(err));
-    };
-    fetchGenre();
-  }, []);
+  const [TVshows, setTVshows] = useState(null);
+  const [nowOn, setNowOn] = useState(null);
+  const [title, setTitle] = useState(null);
+  const [overview, setOverview] = useState(null);
+  const [backdrop, setBackdrop] = useState(null);
+  const [typeShowHidden, setTypeShowHidden] = useState(false);
 
-  const fetchMovies = (genreN) => {
+  const fetchGenre = async (genreType) => {
     fetch(
-      `https://api.themoviedb.org/3/discover/movie?&language=en-US&with_genres=${genreN}`,
+      `https://api.themoviedb.org/3/genre/${genreType}/list?language=en`,
       options
     )
-      .then((res) => res.json())
-      .then((res) => {
-        console.log(res.results);
-        setMovies(res.results);
+      .then((response) => response.json())
+      .then((response) => {
+        // console.log(response.genres);
+        if (genreType === "movie") {
+          setMovieGenres(response.genres);
+          setNowOn("movie");
+        } else if (genreType === "tv") {
+          setTVshowGenres(response.genres);
+          setNowOn("TV");
+        }
       })
       .catch((err) => console.error(err));
   };
 
-  // movies?.forEach((movie) => {
-  //   console.log(movie.backdrop_path)
-  // })
+  const fetchShows = (showType, genreN) => {
+    fetch(
+      `https://api.themoviedb.org/3/discover/${showType}?&language=en-US&with_genres=${genreN}`,
+      options
+    )
+      .then((res) => res.json())
+      .then((res) => {
+        if (showType === "movie") {
+          setMovies(res.results);
+        } else if (showType === "tv") {
+          setTVshows(res.results);
+        }
+        setTitle("");
+        setOverview("");
+        setBackdrop("");
+      })
+      .catch((err) => console.error(err));
+  };
+
+  const handleMovieTVshowClick = (title, overview, backdrop, id, show) => {
+    setTitle(title);
+    setOverview(overview);
+    setBackdrop(`http://image.tmdb.org/t/p/w1280/${backdrop}`);
+    // fetch(`https://api.themoviedb.org/3/${show}/${id}?`, options)
+    //   .then((response) => response.json())
+    //   .then((response) => console.log(response))
+    //   .catch((err) => console.error(err));
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <div style={{ margin: "15px" }}>
-          {genres?.map((genre) => (
-            <button
-              style={{ marginRight: "10px" }}
-              onClick={() => fetchMovies(genre.id)}
-              key={genre.name}
-            >
-              {genre.name}
-            </button>
-          ))}
+      <div
+        className="accordion"
+        style={typeShowHidden ? { marginLeft: "-110px" } : {}}
+      >
+        <WatchType
+          fetchGenre={fetchGenre}
+          setTypeShowHidden={setTypeShowHidden}
+        />
+        {nowOn === "movie" && (
+          <Genres
+            genres={movieGenres}
+            fetchFunc={fetchShows}
+            fetchProp="movie"
+            setTypeShowHidden={setTypeShowHidden}
+          />
+        )}
+        {nowOn === "TV" && (
+          <Genres
+            genres={TVshowGenres}
+            fetchFunc={fetchShows}
+            fetchProp="tv"
+            setTypeShowHidden={setTypeShowHidden}
+          />
+        )}
+        <div className="accordion__batchOfItems">
+          {nowOn === "movie" && (
+            <BatchOfItems
+              shows={movies}
+              handleMovieTVshowClick={handleMovieTVshowClick}
+            />
+          )}
+          {nowOn === "TV" && (
+            <BatchOfItems
+              shows={TVshows}
+              handleMovieTVshowClick={handleMovieTVshowClick}
+            />
+          )}
         </div>
-        <div>
-          {movies?.map((movie) => (
-            <img
-              src={`http://image.tmdb.org/t/p/w500/${movie.backdrop_path}`}
-              alt="kdjlsk"
-            ></img>
-          ))}
-        </div>
-      </header>
+        <FilmOrShowDescr
+          title={title}
+          overview={overview}
+          backdrop={backdrop}
+        />
+      </div>
     </div>
   );
 }

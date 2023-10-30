@@ -1,6 +1,14 @@
 import React, { useState } from "react";
+import { FiArrowLeft } from "react-icons/fi";
 
-function Genres({ genres, fetchFunc, fetchProp, setTypeShowHidden }) {
+function Genres({
+  genres,
+  fetchFunc,
+  fetchProp,
+  setTypeShowHidden,
+  typeShowHidden,
+  typeOfShow,
+}) {
   // console.log(genres);
   const [idOfGenre, setIdOfGenre] = useState("");
   const [] = useState();
@@ -13,14 +21,16 @@ function Genres({ genres, fetchFunc, fetchProp, setTypeShowHidden }) {
     <div className="accordion__genres">
       <ul>
         <div className="backToShowTypes">
-          <button
-            onClick={() => {
-              setTypeShowHidden(false);
-            }}
-          >
-            back
-          </button>
-          <h1>Movies</h1>
+          {typeShowHidden && (
+            <button
+              onClick={() => {
+                setTypeShowHidden(false);
+              }}
+            >
+              <FiArrowLeft size="24" />
+            </button>
+          )}
+          <h1>{typeOfShow}</h1>
         </div>
 
         {genres?.map((genre) => (

@@ -1,6 +1,6 @@
 import React from "react";
 
-function WatchType({ fetchGenre, setTypeShowHidden }) {
+function WatchType({ fetchGenre, setTypeShowHidden, setTypeOfShow }) {
   return (
     <div className="accordion__watchType">
       <ul>
@@ -8,6 +8,7 @@ function WatchType({ fetchGenre, setTypeShowHidden }) {
           onClick={() => {
             fetchGenre("movie");
             setTypeShowHidden(true);
+            setTypeOfShow("Movies");
           }}
         >
           Movies
@@ -16,6 +17,7 @@ function WatchType({ fetchGenre, setTypeShowHidden }) {
           onClick={() => {
             fetchGenre("tv");
             setTypeShowHidden(true);
+            setTypeOfShow("TV shows");
           }}
         >
           TVshows

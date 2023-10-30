@@ -16,6 +16,8 @@ function App() {
   const [overview, setOverview] = useState(null);
   const [backdrop, setBackdrop] = useState(null);
   const [typeShowHidden, setTypeShowHidden] = useState(false);
+  const [typeOfShow, setTypeOfShow] = useState();
+  const [, set] = useState();
 
   const fetchGenre = async (genreType) => {
     fetch(
@@ -74,6 +76,7 @@ function App() {
         <WatchType
           fetchGenre={fetchGenre}
           setTypeShowHidden={setTypeShowHidden}
+          setTypeOfShow={setTypeOfShow}
         />
         {nowOn === "movie" && (
           <Genres
@@ -81,6 +84,8 @@ function App() {
             fetchFunc={fetchShows}
             fetchProp="movie"
             setTypeShowHidden={setTypeShowHidden}
+            typeShowHidden={typeShowHidden}
+            typeOfShow={typeOfShow}
           />
         )}
         {nowOn === "TV" && (
@@ -89,6 +94,8 @@ function App() {
             fetchFunc={fetchShows}
             fetchProp="tv"
             setTypeShowHidden={setTypeShowHidden}
+            typeShowHidden={typeShowHidden}
+            typeOfShow={typeOfShow}
           />
         )}
         <div className="accordion__batchOfItems">

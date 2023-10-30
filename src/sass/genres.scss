@@ -8,12 +8,23 @@
   scrollbar-width: none; /* for Firefox */
   ul {
     .backToShowTypes {
-      display: flex;
+      position: relative;
       color: white;
+      margin-bottom: 20px;
+      h1 {
+        margin-bottom: 0;
+        font-size: 20px;
+        padding-top: 5px;
+        padding-left: 45px;
+      }
       button {
+        position: absolute;
         display: inline-block;
         padding: 0;
+        width: 40px;
+        height: 40px;
         border: none;
+        border-radius: 50%;
         outline: inherit;
         cursor: pointer;
         font-family: inherit;
@@ -21,8 +32,10 @@
         text-decoration: none;
         background-color: gray;
         color: white;
+        margin-right: 15px;
       }
     }
+
     .genresItemContainer {
       display: flex;
       transition: all 1s ease-in-out;

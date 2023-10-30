@@ -8,13 +8,24 @@
   scrollbar-width: none; /* for Firefox */
 }
 .accordion__genres ul .backToShowTypes {
-  display: flex;
+  position: relative;
   color: white;
+  margin-bottom: 20px;
+}
+.accordion__genres ul .backToShowTypes h1 {
+  margin-bottom: 0;
+  font-size: 20px;
+  padding-top: 5px;
+  padding-left: 45px;
 }
 .accordion__genres ul .backToShowTypes button {
+  position: absolute;
   display: inline-block;
   padding: 0;
+  width: 40px;
+  height: 40px;
   border: none;
+  border-radius: 50%;
   outline: inherit;
   cursor: pointer;
   font-family: inherit;
@@ -22,6 +33,7 @@
   text-decoration: none;
   background-color: gray;
   color: white;
+  margin-right: 15px;
 }
 .accordion__genres ul .genresItemContainer {
   display: flex;

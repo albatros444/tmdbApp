@@ -2,6 +2,7 @@ import React from "react";
 
 function BatchOfItems({ shows, handleMovieTVshowClick }) {
   console.log(shows);
+
   return (
     <div className="accordion__batchOfItems">
       {shows?.map((show) => (

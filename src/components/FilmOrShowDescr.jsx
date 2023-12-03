@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 
-function FilmOrShowDescr({ title, overview, backdrop }) {
+function FilmOrShowDescr({ title, overview, backdrop, isLoading }) {
   return (
     <>
       <div
@@ -10,7 +10,7 @@ function FilmOrShowDescr({ title, overview, backdrop }) {
         }}
       >
         <div className="darkDiv">
-          <div className="highBox"></div>
+          <div className="highBox"> </div>
           <div className="lowBox">
             <h1>{title}</h1>
             <p>{overview}</p>

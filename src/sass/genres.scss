@@ -3,9 +3,12 @@
   padding-top: 15px;
   padding-right: 50px;
   height: 100vh;
-  overflow-y: scroll;
+  overflow-y: auto;
   -ms-overflow-style: none; /* for Internet Explorer, Edge */
   scrollbar-width: none; /* for Firefox */
+  &::-webkit-scrollbar {
+    display: none; /*for Chrome, Safari and Opera*/
+  }
   ul {
     .backToShowTypes {
       position: relative;

@@ -8,13 +8,16 @@ function Genres({
   setTypeShowHidden,
   typeShowHidden,
   typeOfShow,
+  setIdOfGenre,
+  idOfGenre,
+  batchPage,
 }) {
   // console.log(genres);
-  const [idOfGenre, setIdOfGenre] = useState("");
+
   const [] = useState();
 
   const handleClick = (genre) => {
-    fetchFunc(fetchProp, genre.id);
+    fetchFunc(fetchProp, genre.id, batchPage);
     setIdOfGenre(genre.id);
   };
   return (
